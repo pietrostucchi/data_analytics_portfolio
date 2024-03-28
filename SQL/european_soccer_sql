@@ -1,0 +1,195 @@
+/* Queries to retrieve informations from a part of European Soccer Database.
+Each of them is precedeed by the corresponding question to explain what is shown. */
+
+----------------------------------------------------------------------------------------------
+
+/* Question 1
+How many days from the oldest match to the most recent one? 
+*/
+
+SELECT
+    DATE_DIFF(MAX(EXTRACT(date FROM date)), MIN(EXTRACT(date FROM date)), DAY) AS dataset_time_interval
+FROM `sql-sandbox-404518.european_soccer.match`;
+
+/* Question 2 
+For each season and league name, show the following statistics about the home goals scored: 
+    * min
+    * average 
+    * mid-range 
+    * max 
+    * sum
+Which combination of season-league has the highest number of goals? 
+*/
+
+SELECT match.season, leagues.name, 
+       MIN(match.home_team_goal) AS min_home_goals,
+       MAX(match.home_team_goal) AS max_home_goals,
+       (MIN(match.home_team_goal) + MAX(match.home_team_goal))/2 AS mid_range_home_goals,
+       ROUND(AVG(match.home_team_goal), 2) AS avg_home_goals,
+       SUM(match.home_team_goal) AS sum_home_goals
+FROM `sql-sandbox-404518.european_soccer.match` AS match
+LEFT JOIN `sql-sandbox-404518.european_soccer.leagues` AS leagues
+ON match.league_id = leagues.id
+GROUP BY match.season, leagues.name
+ORDER BY sum_home_goals DESC;
+
+/*
+Question 3
+How many unique seasons there are in the match table?
+*/
+
+SELECT COUNT(DISTINCT season) AS unique_seasons
+FROM `sql-sandbox-404518.european_soccer.match`;
+
+/*
+Question 4
+For each season, what's the number of matches played by each league?
+*/
+
+SELECT match.season, leagues.name, COUNT(match.league_id) AS nr_matches_played
+FROM `sql-sandbox-404518.european_soccer.match` AS match
+LEFT JOIN `sql-sandbox-404518.european_soccer.leagues` AS leagues
+ON match.league_id = leagues.id
+GROUP BY match.season, leagues.name
+ORDER BY leagues.name;
+
+/*
+Question 5
+Using players as the starting point, create a new table (player_BMI) and:
+    * add a variable that represents the players' weight in kg (from pounds) and call it kg_weight;
+    * add a variable that represents the height in metres (from cm) and call it m_height;
+    * add a variable that shows the body mass index (BMI) of the player;
+    * filter the table to show only the players with an optimal BMI (from 18.5 to 24.9).
+*/
+
+-- 1
+CREATE TABLE european_soccer.player_BMI AS 
+    (
+    SELECT *, 
+        ROUND(weight/2.205, 2) AS kg_weight,
+        ROUND(height/100, 2) AS m_height, 
+        ROUND((weight/2.205)/POW(height/100, 2), 2)  AS BMI
+    FROM `sql-sandbox-404518.european_soccer.player`
+    );
+
+-- 2
+SELECT *
+FROM `sql-sandbox-404518.european_soccer.player_BMI`
+WHERE BMI BETWEEN 18.5 AND 24.9;
+
+/*
+Question 6
+How many players do not have an optimal BMI?
+*/
+
+SELECT COUNT(*) AS qnt_players_not_optimal_BMI
+FROM `sql-sandbox-404518.european_soccer.player_BMI`
+WHERE BMI NOT BETWEEN 18.5 AND 24.9;
+
+/*
+Question 7
+Which team has scored the highest total number of goals (home + away)
+during the most recent available season? How many goals has it scored?
+*/
+
+WITH a AS 
+    (
+        SELECT team.team_long_name, SUM(match.home_team_goal) AS tot_goal
+        FROM `sql-sandbox-404518.european_soccer.match` AS match
+        LEFT JOIN `sql-sandbox-404518.european_soccer.team` AS team
+        ON match.home_team_api_id = team.team_api_id
+        WHERE TRIM(match.season) = '2015/2016'
+        GROUP BY team.team_long_name
+    UNION ALL
+        SELECT team.team_long_name, SUM(match.away_team_goal) AS tot_goal
+        FROM `sql-sandbox-404518.european_soccer.match` AS match
+        LEFT JOIN `sql-sandbox-404518.european_soccer.team` AS team
+        ON match.away_team_api_id = team.team_api_id
+        WHERE TRIM(match.season) = '2015/2016'
+        GROUP BY team.team_long_name
+    )
+SELECT a.team_long_name, SUM(a.tot_goal) AS total_goals
+FROM a
+GROUP BY a.team_long_name
+ORDER BY total_goals DESC;
+
+/*
+Question 8
+For each season, show the name of the team that ranks first in terms of total goals scored.
+Which team was the one that ranked first in most of the seasons? 
+*/
+
+WITH a AS 
+  (
+    SELECT match.season, team.team_long_name, SUM(match.home_team_goal) AS tot_goal
+    FROM `sql-sandbox-404518.european_soccer.match` AS match
+    LEFT JOIN `sql-sandbox-404518.european_soccer.team` AS team
+    ON match.home_team_api_id = team.team_api_id
+    GROUP BY match.season, team.team_long_name
+  UNION ALL
+    SELECT match.season, team.team_long_name, SUM(match.away_team_goal) AS tot_goal
+    FROM `sql-sandbox-404518.european_soccer.match` AS match
+    LEFT JOIN `sql-sandbox-404518.european_soccer.team` AS team
+    ON match.away_team_api_id = team.team_api_id
+    GROUP BY match.season, team.team_long_name
+  ),
+b AS 
+  (
+    SELECT a.season, a.team_long_name, SUM(a.tot_goal) AS total_goals, RANK() OVER (PARTITION BY a.season ORDER BY SUM(a.tot_goal) DESC) AS rank_team
+    FROM a
+    GROUP BY a.season, a.team_long_name
+    ORDER BY a.season
+  )
+SELECT *
+FROM b
+WHERE b.rank_team = 1;
+
+/*
+Question 9
+Create a new table (top_scorer) containing the top 10 teams in terms of total goals scored.
+Then write a query that shows all the possible "pair combinations" between those 10 teams.
+How many "pair combinations" did it generate?
+*/
+
+-- 1
+CREATE TABLE european_soccer.top_scorer AS
+WITH a AS 
+    (
+        SELECT match.home_team_api_id AS team_api_id, team.team_long_name, SUM(match.home_team_goal) AS tot_goal
+        FROM `sql-sandbox-404518.european_soccer.match` AS match
+        LEFT JOIN `sql-sandbox-404518.european_soccer.team` AS team
+        ON match.home_team_api_id = team.team_api_id
+        WHERE TRIM(match.season) = '2015/2016'
+        GROUP BY match.home_team_api_id, team.team_long_name
+
+    UNION ALL
+
+        SELECT match.away_team_api_id AS team_api_id, team.team_long_name, SUM(match.away_team_goal) AS tot_goal
+        FROM `sql-sandbox-404518.european_soccer.match` AS match
+        LEFT JOIN `sql-sandbox-404518.european_soccer.team` AS team
+        ON match.away_team_api_id = team.team_api_id
+        WHERE TRIM(match.season) = '2015/2016'
+        GROUP BY match.away_team_api_id, team.team_long_name
+    ),
+b AS 
+    (
+        SELECT a.team_api_id, a.team_long_name, SUM(a.tot_goal) AS total_goals, RANK() OVER (ORDER BY SUM(a.tot_goal) DESC) AS rank_per_goals
+        FROM a
+        GROUP BY a.team_api_id, a.team_long_name
+        ORDER BY total_goals DESC
+    )
+SELECT * 
+FROM b 
+WHERE b.rank_per_goals <= 10;
+
+-- 2
+WITH c AS(
+  SELECT a.team_api_id, a.team_long_name AS first_team, b.team_api_id, b.team_long_name AS second_team
+  FROM `sql-sandbox-404518.european_soccer.top_scorer` AS a
+  LEFT JOIN `sql-sandbox-404518.european_soccer.top_scorer` AS b
+  ON a.team_api_id < b.team_api_id
+  WHERE b.team_long_name IS NOT NULL
+  ORDER BY a.team_api_id
+)
+SELECT CONCAT(c.first_team, ' - ', c.second_team) AS pair_combinations
+FROM c;
