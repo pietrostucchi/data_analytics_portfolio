@@ -2,7 +2,7 @@
 
 ## Summary of Project
 
-With this project, I would like to show my skills in using SQL: calculations with operators, joins, union operator, Data Definition Language, Data Manipulation Language, subqueries, window functions.
+With this project, I'm showing my skills in using SQL: calculations with operators, joins, union operator, Data Definition Language, Data Manipulation Language, subqueries, window functions.
 
 I will query some tables of the European Soccer Database, which holds informations about matches, leagues, players and teams attributes for European Professional Football.
 
@@ -12,9 +12,9 @@ You can find the tables in the European Soccer Database folder as a collection o
 * player.csv 
 * team.csv
 
-The schema of the relationships between these four tables at this [LucidChart link](https://lucid.app/lucidchart/4207f1c5-49cd-4c6c-b0ab-6ec904dbedef/edit?viewport_loc=-934%2C-186%2C1813%2C743%2C0_0&invitationId=inv_3523cced-c79f-4438-87cd-ba59a218d87a).
+The schema of the relationships between these four tables can be consulted at this [LucidChart link](https://lucid.app/lucidchart/4207f1c5-49cd-4c6c-b0ab-6ec904dbedef/edit?viewport_loc=-934%2C-186%2C1813%2C743%2C0_0&invitationId=inv_3523cced-c79f-4438-87cd-ba59a218d87a).
 
-Instead, the entire database is public and can be found on [Kaggle](https://www.kaggle.com/datasets/hugomathien/soccer).
+On the other hand, the entire database is public and can be found on [Kaggle](https://www.kaggle.com/datasets/hugomathien/soccer).
 
 I made this project uploading the csv files on Google BigQuery.
 
