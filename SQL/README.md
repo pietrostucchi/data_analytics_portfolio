@@ -16,7 +16,7 @@ The schema of the relationships between these four tables can be consulted at th
 
 On the other hand, the entire database is public and can be found on [Kaggle](https://www.kaggle.com/datasets/hugomathien/soccer).
 
-I made this project uploading the csv files on Google BigQuery.
+I've made this project by uploading the csv files on Google BigQuery.
 
 ## Files
 
