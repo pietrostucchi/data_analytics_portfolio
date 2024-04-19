@@ -1,10 +1,10 @@
 # Python Scripts
 
-## Summary
+## Project Summary
 
-In this repo, I would like to show some of my skills with Web Scraping, API and, in general, the development of some algorithms.
+In this repo, I'm showing some of my skills with Web Scraping, API and, in general, the development of some algorithms.
 
-In particular, you can find two scripts in which I used these libraries and modules:
+In particular, you can see two scripts in which I've used these libraries and modules:
 * pathlib (Path)
 * os
 * bs4 (BeautifulSoup)
@@ -28,7 +28,7 @@ Finally, I draw a time series for the exchange between Bitcoin and Euro and save
 
 #### Notes to ```script_1```: 
 
-I cared to generalize: 
+I've cared to generalize: 
 1. path objects, so that this script can be run without problems by anyone
 2. time limits of the last month, that are calculated based on the date the script is started
 
