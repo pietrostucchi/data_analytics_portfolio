@@ -6,7 +6,7 @@ With this project, I'm showing my skills in using SQL: calculations with operato
 
 I will query some tables of the European Soccer Database, which holds informations about matches, leagues, players and teams attributes for European Professional Football.
 
-You can find the tables in the European Soccer Database folder as a collection of four individual csv files:
+You can see the tables in the European Soccer Database folder as a collection of four individual csv files:
 * leagues.csv
 * match.csv
 * player.csv 
