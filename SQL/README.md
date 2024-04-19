@@ -23,9 +23,9 @@ I've made this project by uploading the csv files on Google BigQuery.
 ```european_soccer.sql```: queries to answer to each question  
 ```european_soccer_database```: csv data folder
 
-## Informations to retrieve
+## Information to retrieve
 
-I wanted to answer the following questions:
+I've wanted to answer the following questions:
 
 1. How many days have passed from the oldest Match to the most recent one (dataset time interval)?
 
@@ -38,7 +38,7 @@ I wanted to answer the following questions:
 
     Which combination of season-league has the highest number of goals? 
 
-3. How many unique seasons there are in the match table?
+3. How many unique seasons are there in the match table?
 
 4. For each season, what's the number of matches played by each League?
 
