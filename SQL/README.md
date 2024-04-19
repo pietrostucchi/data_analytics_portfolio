@@ -1,6 +1,6 @@
 # SQL Analysis - European Soccer Database
 
-## Summary of Project
+## Project Summary 
 
 With this project, I'm showing my skills in using SQL: calculations with operators, joins, union operator, Data Definition Language, Data Manipulation Language, subqueries, window functions.
 
