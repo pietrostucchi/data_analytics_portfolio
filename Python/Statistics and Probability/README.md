@@ -16,8 +16,8 @@ I've used these libraries to retrieve, clean, manipulate and plot data:
 * matplotlib
 * seaborn
 
-Data are from different sources. In the first Notebook, ```call_center.ipynb```, I've downloaded data from this [link on Kaggle](https://www.kaggle.com/datasets/satvicoder/call-center-data?resource=download). You can also see them in ```Call Center Data``` folder.
-In ```planets_iris.ipynb```, data are from seaborn library.
+Data are from different sources. In the first Notebook, ```call_center.ipynb```, I've downloaded data from this [link on Kaggle](https://www.kaggle.com/datasets/satvicoder/call-center-data?resource=download). You can also see them in ```Call Center Data``` folder.  
+In ```planets_iris.ipynb```, data are from seaborn library.  
 Then, ```coin_dice_ball.ipynb``` is about probability. I've written some short programs and functions about probability of coin tosses and rolls of dice. Thus, I haven't loaded data, but I've just scraped some strings from Wikipedia to write a program that simulates a negatively biased Magic 8 Ball. So, read the code until the end and try asking the Ball something!
 
 ## Files
