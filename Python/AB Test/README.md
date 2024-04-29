@@ -2,7 +2,7 @@
 
 ## Summary
 
-This is an example of A/B test to assess, with a permutation test, the conversion rate variation after a hypothetical change applied to an ecommerce web site.  
+This is an example of A/B test to assess, with a permutation test, the conversion rate variation after a hypothetical change applied to an e-commerce web site.  
 I've used these libraries:
 * os
 * pandas
@@ -29,11 +29,13 @@ The amount of observations is not equally divided by the two groups and time tak
 Then, I've looked at two other statistics about each group of observations: amount of conversion and conversion rate.
 Given a baseline conversion rate of 26.77% and about 3000 observations per group, the minimum detectable effect is about 3.2%.
 
-### Test steps
+### Hypothesis
 
 * Null Hypothesis (H0): the difference between the treatment group conversion rate and that of the control group, if it exists, is not statistically significant
 
-* Alternative hypothesis (H1): the difference is statistically significant
+* Alternative Hypothesis (H1): the difference is statistically significant
+
+### Test steps
 
 * Chosen significance level (alpha): 5%
 
@@ -42,7 +44,7 @@ $\mu_{t}-\mu_{c}$
 difference between the mean (conversion rate) of the treatment and that of the control group
 
 * Calculation of the Average Simulated Test Statistic (permutation process):  
-differences between the conversion rate of the sample random groups
+differences between the conversion rate of enough sample random groups
 
 * Histogram of the distribution of the means obtained with the permutation process
 
