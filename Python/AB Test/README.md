@@ -27,7 +27,7 @@ In particular, there are 6177 unique observations. They are about 3000 per group
 The amount of observations is not equally divided by the two groups and time taken to collect data seems like too long. A whole year could be too much time for a business. Thus, maybe the experiment could have been design better, but this is just a guess since I don't know which business the data come from.
 
 Then, I've looked at two other statistics about each group of observations: amount of conversion and conversion rate.  
-Given a baseline conversion rate of 26.77% and about 3000 observations per group, the minimum detectable effect is about 3.2% with $\alpha$ = 0.05 and $1-\beta$ = 0.8
+Given a baseline conversion rate of 26.77% and about 3000 observations per group, the minimum detectable effect is about 3.2% (with $\alpha$ = 0.05 and $1-\beta$ = 0.8).
 
 ### Hypothesis
 
