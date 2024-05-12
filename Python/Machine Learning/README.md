@@ -3,7 +3,8 @@
 ## Summary
 
 Here, you can see some Notebooks about Machine Learning.  
-In particular, I've written codes for examples about Simple Linear Regression and Multiple Linear Regression.
+In particular, I've written codes for examples about Simple Linear Regression and Multiple Linear Regression.  
+
 I've used these libraries:
 
 * pandas
