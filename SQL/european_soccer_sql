@@ -1,9 +1,10 @@
-/* Queries to retrieve informations from a part of European Soccer Database.
+/* Queries to retrieve information from a part of European Soccer Database.
 Each of them is precedeed by the corresponding question to explain what is shown. */
 
 ----------------------------------------------------------------------------------------------
 
-/* Question 1
+/* 
+Question 1
 How many days from the oldest match to the most recent one? 
 */
 
@@ -11,7 +12,8 @@ SELECT
     DATE_DIFF(MAX(EXTRACT(date FROM date)), MIN(EXTRACT(date FROM date)), DAY) AS dataset_time_interval
 FROM `sql-sandbox-404518.european_soccer.match`;
 
-/* Question 2 
+/*
+Question 2 
 For each season and league name, show the following statistics about the home goals scored: 
     * min
     * average 
