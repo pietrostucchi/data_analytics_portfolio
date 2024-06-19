@@ -22,7 +22,7 @@ In particular, you can see two scripts in which I've used these libraries and mo
 ## Scripts in details
 
 In ```script_1``` I start by creating a new folder, '1_unprocessed', to save in csv files obtained by API requests. Data retrieved in this way are daily statistics about Bitcoin.
-Then, these files are moved from '1_unprocessed' to a new folder called '2-processed' . With every move, they are concatenated in a new dataframe and, in the end of the cycle, the starting folder is deleted.
+Then, these files are moved from '1_unprocessed' to a new folder called '2_processed' . With every move, they are concatenated in a new dataframe and, in the end of the cycle, the starting folder is deleted.
 This dataframe contains statistics data about Bitcoin for every day of last month.
 Finally, I draw a time series for the exchange between Bitcoin and Euro and save it as png locally. 
 

@@ -11,7 +11,7 @@ I've used these libraries to retrieve, clean, manipulate and plot some insights:
 * matplotlib
 * seaborn
 
-The databases are from Kaggle, where you can find the entires datasets, and from Seaborn library.  
+The databases are from Kaggle, where you can find the entire datasets, and from Seaborn library.  
 Link to databases on Kaggle: [Software Industry Salary Dataset - 2022](https://www.kaggle.com/datasets/iamsouravbanerjee/software-professional-salaries-2022?search=salary) and [Indian Startups - Funding Data](https://www.kaggle.com/datasets/omkargowda/indian-startups-funding-data?select=startup_funding2019.csv).
 
 In the first notebook, software_professional_salaries, I've explored Software_Professional_Salaries.csv.  
